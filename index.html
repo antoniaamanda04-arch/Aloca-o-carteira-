@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alocação da Carteira</title>
+<style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background:#1f2a2e;
+  color:#fff;
+  padding:20px;
+}
+.container { max-width:420px; margin:auto; }
+h2 { text-align:center; margin-bottom:24px; }
+.item { margin-bottom:22px; }
+.label {
+  display:flex;
+  justify-content:space-between;
+  font-size:15px;
+  margin-bottom:6px;
+}
+input[type=range] { width:100%; }
+.total {
+  margin-top:30px;
+  font-weight:600;
+  text-align:center;
+  font-size:18px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h2>Alocação da Carteira</h2>
+
+<div class="item">
+  <div class="label"><span>Renda Fixa</span><span id="v0">55%</span></div>
+  <input type="range" min="0" max="100" value="55" oninput="update()">
+</div>
+
+<div class="item">
+  <div class="label"><span>Ações Nacionais</span><span id="v1">20%</span></div>
+  <input type="range" min="0" max="100" value="20" oninput="update()">
+</div>
+
+<div class="item">
+  <div class="label"><span>Fundos Imobiliários</span><span id="v2">20%</span></div>
+  <input type="range" min="0" max="100" value="20" oninput="update()">
+</div>
+
+<div class="item">
+  <div class="label"><span>Criptomoedas</span><span id="v3">5%</span></div>
+  <input type="range" min="0" max="100" value="5" oninput="update()">
+</div>
+
+<div class="item">
+  <div class="label"><span>Ações Internacionais</span><span id="v4">0%</span></div>
+  <input type="range" min="0" max="100" value="0" oninput="update()">
+</div>
+
+<div class="item">
+  <div class="label"><span>REITs</span><span id="v5">0%</span></div>
+  <input type="range" min="0" max="100" value="0" oninput="update()">
+</div>
+
+<div class="total" id="total">Total: 100%</div>
+</div>
+
+<script>
+function update() {
+  const sliders = document.querySelectorAll('input[type=range]');
+  let total = 0;
+  sliders.forEach((s, i) => {
+    document.getElementById('v'+i).innerText = s.value + '%';
+    total += Number(s.value);
+  });
+  document.getElementById('total').innerText = 'Total: ' + total + '%';
+}
+</script>
+</body>
+</html>
