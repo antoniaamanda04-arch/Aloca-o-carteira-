@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alocação da Carteira</title>
+<title>Planejamento Financeiro Pessoal</title>
+
 <style>
 body {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -11,71 +12,202 @@ body {
   color:#fff;
   padding:20px;
 }
-.container { max-width:420px; margin:auto; }
-h2 { text-align:center; margin-bottom:24px; }
-.item { margin-bottom:22px; }
-.label {
-  display:flex;
-  justify-content:space-between;
-  font-size:15px;
-  margin-bottom:6px;
+.container {
+  max-width:420px;
+  margin:auto;
 }
-input[type=range] { width:100%; }
-.total {
-  margin-top:30px;
+h2 {
+  text-align:center;
+  margin-bottom:20px;
+}
+.section {
+  background:#263238;
+  padding:16px;
+  border-radius:12px;
+  margin-bottom:20px;
+}
+.section h3 {
+  margin-top:0;
+}
+.label {
+  font-size:14px;
+  margin-bottom:4px;
+}
+input {
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  margin-bottom:12px;
+  font-size:15px;
+}
+.result {
   font-weight:600;
   text-align:center;
-  font-size:18px;
+  margin-top:10px;
+}
+.highlight {
+  color:#4fc3f7;
+  font-weight:700;
 }
 </style>
 </head>
+
 <body>
 <div class="container">
-<h2>Alocação da Carteira</h2>
 
-<div class="item">
-  <div class="label"><span>Renda Fixa</span><span id="v0">55%</span></div>
-  <input type="range" min="0" max="100" value="55" oninput="update()">
+<h2>📊 Planejamento Financeiro Pessoal</h2>
+
+<!-- BLOCO 1 -->
+<div class="section">
+  <h3>Patrimônio Atual</h3>
+
+  <div class="label">Caixa / Conta</div>
+  <input type="number" id="caixa">
+
+  <div class="label">Renda Fixa</div>
+  <input type="number" id="fixa">
+
+  <div class="label">Renda Variável</div>
+  <input type="number" id="variavel">
+
+  <div class="label">Exterior / Outros</div>
+  <input type="number" id="exterior">
+
+  <div class="result">
+    Patrimônio Total:
+    <span class="highlight" id="totalPatrimonio">R$ 0</span>
+  </div>
 </div>
 
-<div class="item">
-  <div class="label"><span>Ações Nacionais</span><span id="v1">20%</span></div>
-  <input type="range" min="0" max="100" value="20" oninput="update()">
+<!-- BLOCO 2 -->
+<div class="section">
+  <h3>Fluxo Mensal</h3>
+
+  <div class="label">Renda Mensal Líquida</div>
+  <input type="number" id="renda">
+
+  <div class="label">Gastos Fixos</div>
+  <input type="number" id="fixos">
+
+  <div class="label">Gastos Variáveis</div>
+  <input type="number" id="variaveis">
+
+  <div class="result">
+    Aporte Mensal:
+    <span class="highlight" id="aporte">R$ 0</span>
+  </div>
+
+  <div class="result">
+    Taxa de Poupança:
+    <span class="highlight" id="taxa">0%</span>
+  </div>
 </div>
 
-<div class="item">
-  <div class="label"><span>Fundos Imobiliários</span><span id="v2">20%</span></div>
-  <input type="range" min="0" max="100" value="20" oninput="update()">
+<!-- BLOCO 3 -->
+<div class="section">
+  <h3>🛟 Reserva de Segurança</h3>
+
+  <div class="label">Custo de Vida Mensal</div>
+  <input type="number" id="custoVida">
+
+  <div class="label">Meses de Segurança</div>
+  <input type="number" id="mesesReserva">
+
+  <div class="label">Valor Já Reservado</div>
+  <input type="number" id="reservaAtual">
+
+  <div class="result">
+    Reserva Ideal:
+    <span class="highlight" id="reservaIdeal">R$ 0</span>
+  </div>
+
+  <div class="result">
+    Gap da Reserva:
+    <span class="highlight" id="gapReserva">R$ 0</span>
+  </div>
 </div>
 
-<div class="item">
-  <div class="label"><span>Criptomoedas</span><span id="v3">5%</span></div>
-  <input type="range" min="0" max="100" value="5" oninput="update()">
+<!-- BLOCO 4 -->
+<div class="section">
+  <h3>🏖️ Aposentadoria</h3>
+
+  <div class="label">Idade Atual</div>
+  <input type="number" id="idadeAtual">
+
+  <div class="label">Idade para Aposentar</div>
+  <input type="number" id="idadeAposentar">
+
+  <div class="label">Renda Mensal Desejada (valor de hoje)</div>
+  <input type="number" id="rendaApos">
+
+  <div class="label">Rentabilidade Anual Estimada (%)</div>
+  <input type="number" id="rentabilidade">
+
+  <div class="result">
+    Patrimônio Necessário:
+    <span class="highlight" id="patrimonioNecessario">R$ 0</span>
+  </div>
 </div>
 
-<div class="item">
-  <div class="label"><span>Ações Internacionais</span><span id="v4">0%</span></div>
-  <input type="range" min="0" max="100" value="0" oninput="update()">
-</div>
-
-<div class="item">
-  <div class="label"><span>REITs</span><span id="v5">0%</span></div>
-  <input type="range" min="0" max="100" value="0" oninput="update()">
-</div>
-
-<div class="total" id="total">Total: 100%</div>
 </div>
 
 <script>
-function update() {
-  const sliders = document.querySelectorAll('input[type=range]');
-  let total = 0;
-  sliders.forEach((s, i) => {
-    document.getElementById('v'+i).innerText = s.value + '%';
-    total += Number(s.value);
+const ids = [
+  "caixa","fixa","variavel","exterior",
+  "renda","fixos","variaveis",
+  "custoVida","mesesReserva","reservaAtual",
+  "idadeAtual","idadeAposentar","rendaApos","rentabilidade"
+];
+
+ids.forEach(id => {
+  const el = document.getElementById(id);
+  el.value = localStorage.getItem(id) || "";
+  el.addEventListener("input", calcular);
+});
+
+function calcular() {
+  ids.forEach(id => {
+    localStorage.setItem(id, document.getElementById(id).value);
   });
-  document.getElementById('total').innerText = 'Total: ' + total + '%';
+
+  const caixa = +caixa.value || 0;
+  const fixa = +fixa.value || 0;
+  const variavel = +variavel.value || 0;
+  const exterior = +exterior.value || 0;
+
+  const totalPat = caixa + fixa + variavel + exterior;
+  totalPatrimonio.innerText =
+    totalPat.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+
+  const rendaVal = +renda.value || 0;
+  const gastos = (+fixos.value || 0) + (+variaveis.value || 0);
+  const aporte = rendaVal - gastos;
+
+  aporteEl = aporte.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+  aporteEl && (aporte.innerText = aporteEl);
+
+  const taxa = rendaVal > 0 ? (aporte / rendaVal) * 100 : 0;
+  taxaEl = taxa.toFixed(1) + "%";
+  taxaEl && (taxa.innerText = taxaEl);
+
+  const reservaIdeal = (+custoVida.value || 0) * (+mesesReserva.value || 0);
+  reservaIdealEl = reservaIdeal.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+  reservaIdealEl && (reservaIdeal.innerText = reservaIdealEl);
+
+  const gap = reservaIdeal - (+reservaAtual.value || 0);
+  gapReserva.innerText =
+    gap.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+
+  const patrimonioNecessario = (+rendaApos.value || 0) * 12 * 25;
+  patrimonioNecessarioEl =
+    patrimonioNecessario.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+  patrimonioNecessarioEl &&
+    (patrimonioNecessario.innerText = patrimonioNecessarioEl);
 }
+
+calcular();
 </script>
+
 </body>
 </html>
